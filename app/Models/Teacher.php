@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,9 +8,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\MyClass;
+use App\Models\Users;
 
 
-class User extends Authenticatable implements JWTSubject
+class Teacher extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
 
-     protected $table = 'users';
+     protected $table = 'teachers';
     protected $fillable = [
         'name',
         'email',
@@ -61,8 +61,25 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function classes()
-    {
-        return $this->belongsToMany('App\Models\Class');
-    }
+    
+public function classes()
+{
+    return $this->belongsToMany('App\Models\Class');
 }
+
+public function users()
+{
+    return $this->hasMany(Users::class);
+}
+
+}
+
+
+
+
+
+
+
+
+
+
